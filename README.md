@@ -29,6 +29,18 @@ Design and status docs live in [docs](docs/README.md). Start with:
 
 Forward-looking work is tracked in [TODO.md](TODO.md).
 
+## Agent integration skill
+
+Agents can use the repo-hosted skill in [skills/pat-approval](skills/pat-approval/SKILL.md). It tells
+agents how to register with P.A.T., check policy before side effects, submit approval requests, and
+wait for results.
+
+The skill also includes a dependency-free Python client:
+
+```bash
+PAT_API_KEY=... python skills/pat-approval/scripts/pat_client.py
+```
+
 ## Why no vector database yet?
 
 Approval queues and audit trails are transactional records, not vector-search problems. SQLite is the

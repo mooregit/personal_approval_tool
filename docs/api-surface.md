@@ -52,6 +52,15 @@ messages and submit through this same path.
 
 The dashboard is currently a minimal review queue, not yet a full policy/agent management interface.
 
+## Agent skill
+
+The repo includes an installable agent integration skill:
+
+- `skills/pat-approval/SKILL.md`
+- `skills/pat-approval/scripts/pat_client.py`
+
+Agents should use the skill instructions before side-effectful actions.
+
 ```mermaid
 flowchart TB
     Client["Agent or dashboard"]

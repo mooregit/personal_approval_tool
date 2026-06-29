@@ -19,6 +19,7 @@ Last updated: 2026-06-29
 - Agent registry and onboarding status.
 - Agent-specific effective permissions endpoint.
 - Polling agent example.
+- Repo-hosted `pat-approval` agent integration skill.
 
 ## Current database revisions
 
