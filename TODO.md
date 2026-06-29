@@ -5,7 +5,6 @@
 - Build dashboard views for agents, policies, and policy check history.
 - Add a guided onboarding flow for `new` agents.
 - Add a policy editor UI with condition validation.
-- Add a systemd user service template for Linux.
 - Reduce repeated Alembic startup logs by running migrations once per process lifecycle.
 - Add secure API key generation/setup command.
 - Add desktop notifications for pending approvals and new agent onboarding.

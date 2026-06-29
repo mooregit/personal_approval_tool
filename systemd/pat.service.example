@@ -1,0 +1,15 @@
+[Unit]
+Description=P.A.T. Personal Approval Tool
+Documentation=https://github.com/mooregit/personal_approval_tool
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/rmoore/dev/personal-approval-tool
+EnvironmentFile=/home/rmoore/dev/personal-approval-tool/.env
+ExecStart=/home/rmoore/dev/personal-approval-tool/.venv/bin/uvicorn pat.app:app --host 127.0.0.1 --port 8765
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

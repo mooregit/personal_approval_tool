@@ -57,6 +57,50 @@ Create a migration:
 
 The app currently runs migrations at startup through `Database.init()`.
 
+## Linux user service
+
+P.A.T. can run continuously as a systemd user service.
+
+Install and start using the helper:
+
+```bash
+scripts/install-user-service.sh
+```
+
+The helper writes:
+
+```text
+~/.config/systemd/user/pat.service
+```
+
+It uses the current checkout path, `.env`, and `.venv/bin/uvicorn`.
+
+Manual install:
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp systemd/pat.service.example ~/.config/systemd/user/pat.service
+systemctl --user daemon-reload
+systemctl --user enable --now pat.service
+```
+
+If you copy the example manually, edit `WorkingDirectory`, `EnvironmentFile`, and `ExecStart` first.
+
+Service commands:
+
+```bash
+systemctl --user status pat.service
+systemctl --user restart pat.service
+systemctl --user stop pat.service
+journalctl --user -u pat.service -f
+```
+
+To let user services continue after logout:
+
+```bash
+loginctl enable-linger "$USER"
+```
+
 ## Verification
 
 ```bash
@@ -64,6 +108,7 @@ The app currently runs migrations at startup through `Database.init()`.
 .venv/bin/ruff check .
 ```
 
-## Current service state
+## Service state
 
-P.A.T. is ready to be run as a Linux user service, but the systemd unit has not been added yet.
+The repo includes a systemd user service template and install helper. The helper does not commit or
+modify `.env`; it only requires that `.env` exists locally.

@@ -223,5 +223,12 @@ enabled policy matches, P.A.T. defaults to `require_approval`.
 
 ## Service mode
 
-Linux service installation is intentionally not automated yet. The app is service-ready: run it with
-`uvicorn` behind a user-level systemd unit once the v1 API and dashboard are stable.
+P.A.T. can run continuously as a Linux systemd user service:
+
+```bash
+scripts/install-user-service.sh
+systemctl --user status pat.service
+journalctl --user -u pat.service -f
+```
+
+See [Operations](docs/operations.md) for manual install commands and service notes.
