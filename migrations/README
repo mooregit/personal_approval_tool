@@ -1,0 +1,9 @@
+Alembic migrations for P.A.T.
+
+Create a new migration after schema changes:
+
+    .venv/bin/alembic revision -m "describe change"
+
+Apply migrations:
+
+    PAT_DATABASE_PATH=./data/pat.sqlite3 .venv/bin/alembic upgrade head

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>P.A.T.</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>P.A.T.</h1>
+        <p>Personal Approval Tool</p>
+      </div>
+      <div class="auth">
+        <input id="apiKey" type="password" placeholder="API key" autocomplete="off" />
+        <button id="saveKey" type="button">Save</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="queue">
+        <div class="section-header">
+          <h2>Approval Queue</h2>
+          <select id="statusFilter" aria-label="Status filter">
+            <option value="pending">Pending</option>
+            <option value="">All</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="edited">Edited</option>
+            <option value="marked_wrong">Marked wrong</option>
+            <option value="expired">Expired</option>
+            <option value="auto_approved">Auto-approved</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div id="queueList" class="queue-list"></div>
+      </section>
+
+      <section class="detail">
+        <div class="section-header">
+          <h2>Review</h2>
+          <span id="selectedStatus" class="badge">No selection</span>
+        </div>
+        <div id="detailPane" class="detail-pane empty">Select a request to review.</div>
+      </section>
+    </main>
+
+    <template id="requestTemplate">
+      <button class="request-row" type="button">
+        <span class="request-title"></span>
+        <span class="request-meta"></span>
+      </button>
+    </template>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

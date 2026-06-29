@@ -1,0 +1,39 @@
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+
+# Runtime data
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.log
+logs/
+
+# Python caches and build output
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Tooling and editor state
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local scratch
+tmp/
+*.tmp
