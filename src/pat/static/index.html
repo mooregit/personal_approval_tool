@@ -12,37 +12,147 @@
         <h1>P.A.T.</h1>
         <p>Personal Approval Tool</p>
       </div>
+      <nav class="tabs" aria-label="Dashboard views">
+        <button class="tab active" type="button" data-view="approvals">Approvals</button>
+        <button class="tab" type="button" data-view="agents">Agents</button>
+        <button class="tab" type="button" data-view="policies">Policies</button>
+        <button class="tab" type="button" data-view="audit">Audit</button>
+      </nav>
       <div class="auth">
         <input id="apiKey" type="password" placeholder="API key" autocomplete="off" />
         <button id="saveKey" type="button">Save</button>
       </div>
     </header>
 
-    <main class="layout">
-      <section class="queue">
-        <div class="section-header">
-          <h2>Approval Queue</h2>
-          <select id="statusFilter" aria-label="Status filter">
-            <option value="pending">Pending</option>
-            <option value="">All</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-            <option value="edited">Edited</option>
-            <option value="marked_wrong">Marked wrong</option>
-            <option value="expired">Expired</option>
-            <option value="auto_approved">Auto-approved</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
+    <main>
+      <section id="approvalsView" class="layout view active">
+        <div class="queue">
+          <div class="section-header">
+            <h2>Approval Queue</h2>
+            <select id="statusFilter" aria-label="Status filter">
+              <option value="pending">Pending</option>
+              <option value="">All</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="edited">Edited</option>
+              <option value="marked_wrong">Marked wrong</option>
+              <option value="expired">Expired</option>
+              <option value="auto_approved">Auto-approved</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div id="queueList" class="queue-list"></div>
         </div>
-        <div id="queueList" class="queue-list"></div>
+
+        <div class="detail">
+          <div class="section-header">
+            <h2>Review</h2>
+            <span id="selectedStatus" class="badge">No selection</span>
+          </div>
+          <div id="detailPane" class="detail-pane empty">Select a request to review.</div>
+        </div>
       </section>
 
-      <section class="detail">
-        <div class="section-header">
-          <h2>Review</h2>
-          <span id="selectedStatus" class="badge">No selection</span>
+      <section id="agentsView" class="management-layout view">
+        <div class="panel">
+          <div class="section-header">
+            <h2>Agents</h2>
+            <button id="refreshAgents" type="button">Refresh</button>
+          </div>
+          <div id="agentsList" class="table-wrap"></div>
         </div>
-        <div id="detailPane" class="detail-pane empty">Select a request to review.</div>
+
+        <div class="panel">
+          <div class="section-header">
+            <h2>Agent Detail</h2>
+            <span id="agentStatus" class="badge">No selection</span>
+          </div>
+          <div id="agentDetail" class="detail-pane empty">Select an agent to inspect.</div>
+        </div>
+      </section>
+
+      <section id="policiesView" class="management-layout view">
+        <div class="panel">
+          <div class="section-header">
+            <h2>Policies</h2>
+            <button id="refreshPolicies" type="button">Refresh</button>
+          </div>
+          <div id="policiesList" class="table-wrap"></div>
+        </div>
+
+        <div class="panel">
+          <div class="section-header">
+            <h2>Policy Editor</h2>
+            <span id="policyMode" class="badge">Create</span>
+          </div>
+          <form id="policyForm" class="form-grid">
+            <input id="policyId" type="hidden" />
+            <label>
+              Name
+              <input id="policyName" required maxlength="200" />
+            </label>
+            <label>
+              Agent
+              <input id="policyAgent" maxlength="120" placeholder="blank for global" />
+            </label>
+            <label>
+              Action
+              <input id="policyAction" maxlength="200" placeholder="send_email" />
+            </label>
+            <label>
+              Resource
+              <input id="policyResource" maxlength="200" placeholder="gmail" />
+            </label>
+            <label>
+              Decision
+              <select id="policyDecision">
+                <option value="require_approval">Require approval</option>
+                <option value="allow">Allow</option>
+                <option value="deny">Deny</option>
+                <option value="auto_approve">Auto-approve</option>
+                <option value="log_only">Log only</option>
+              </select>
+            </label>
+            <label>
+              Risk
+              <select id="policyRisk">
+                <option value="unknown">Unknown</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="critical">Critical</option>
+              </select>
+            </label>
+            <label>
+              Priority
+              <input id="policyPriority" type="number" min="0" max="10000" value="100" />
+            </label>
+            <label class="check-row">
+              <input id="policyEnabled" type="checkbox" checked />
+              Enabled
+            </label>
+            <label class="wide">
+              Description
+              <input id="policyDescription" maxlength="1000" />
+            </label>
+            <label class="wide">
+              Conditions JSON
+              <textarea id="policyConditions">{}</textarea>
+            </label>
+            <div class="actions wide">
+              <button class="primary" type="submit">Save policy</button>
+              <button id="resetPolicyForm" type="button">Reset</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="auditView" class="single-layout view">
+        <div class="section-header">
+          <h2>Policy Check Audit</h2>
+          <button id="refreshAudit" type="button">Refresh</button>
+        </div>
+        <div id="auditList" class="table-wrap"></div>
       </section>
     </main>
 
